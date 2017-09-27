@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JSON with jQuery</title>
+  </head>
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    // $.ajax({
+    //   url: 'api-endpoint.json',
+    //   dataType: 'json' ,
+    //   success: function(data) {
+    //      $(data).each(function(index, value) {
+    //     console.log(data);
+    //     // console.log(value.title);
+    //    });
+    //    }
+    //  });
+
+
+//     $.getJSON('api-endpoint.json', function(data) {
+//     $.each(data, function(index, element) {
+//       console.log(data);
+//         $('body').append($('<div>', {
+//             text: element.name
+//         }));
+//     });
+// });
+
+$(document).ready(function(){
+$.getJSON('api-endpoint.json', function(data) {
+  var api_data = '';
+$.each(data, function(key, value) {
+  // console.log(data);
+  api_data += '<ul>';
+  api_data += '<li>' +value.date+'</li';
+  api_data += '</ul>'
+        });
+        $('#api_table').append(api_data);
+    });
+});
+
+
+
+   </script>
+  </body>
+</html>
