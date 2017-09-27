@@ -5,10 +5,11 @@
     <title>JSON with jQuery</title>
   </head>
   <body>
+    <p id="output"></p>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
     // $.ajax({
-    //   url: 'api-endpoint.json',
+    //   url: 'api_endpoint.json',
     //   dataType: 'json' ,
     //   success: function(data) {
     //      $(data).each(function(index, value) {
@@ -19,29 +20,59 @@
     //  });
 
 
-//     $.getJSON('api-endpoint.json', function(data) {
+//     $.getJSON('api_endpoint.json', function(data) {
 //     $.each(data, function(index, element) {
 //       console.log(data);
-//         $('body').append($('<div>', {
-//             text: element.name
-//         }));
+//     });
+// });
+
+$( document ).ready(function() {
+var formURL = 'http://www.genfkd.org/?rest_route=/wp/v2/posts';
+        $.getJSON( formURL, function(json) {
+          $.each(json, function(key, val) {
+              $.each(val, function(index, value){
+                   console.log(value.rendered);
+              });
+          });
+            });
+});
+
+// function myFunction() {
+// var output = document.getElementById('output');
+// output.innerHTML = 'new content';
+// }
+
+// $(document).ready(function(){
+// $.getJSON('api_endpoint.json', function(data) {
+//   var api_data = '';
+//   console.log(data);
+// // $.each(data, function() {
+// //     console.log(data);
+//   //  console.log(data.rendered);
+//   output.innerHTML += '<ul>';
+//   output.innerHTML += '<li>' +data[0]+'</li';
+//   output.innerHTML += '<li>' +data[1]+'</li';
+//         // });
+//         // $('#api_table').append(api_data);
+//     });
+// });
+// $.getJSON(http://www.genfkd.org/?rest_route=/wp/v2/posts, function (json) {
+//     alert(json.result);
+//     $.each(json.list, function (i, fb) {
+//         alert(fb.result);
 //     });
 // });
 
 $(document).ready(function(){
-$.getJSON('api-endpoint.json', function(data) {
-  var api_data = '';
-$.each(data, function(key, value) {
-  // console.log(data);
-  api_data += '<ul>';
-  api_data += '<li>' +value.date+'</li';
-  api_data += '</ul>'
-        });
-        $('#api_table').append(api_data);
+$.getJSON('api_endpoint.json', function(data) {
+  var api_data = data;
+  console.log(api_data);
+
+  $.each(data, function() {
+  output.innerHTML += '<li>'+'<a href="data">' +data[0]+'</a>'+'</li';
+         });
     });
 });
-
-
 
    </script>
   </body>
