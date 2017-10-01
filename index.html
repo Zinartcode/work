@@ -151,56 +151,44 @@
   <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
 
   <script>
-    $(document).ready(function() {
-      var formURL = 'http://www.genfkd.org/?rest_route=/wp/v2/posts';
-      $.getJSON(formURL, function(data) {
-        var api_data = data;
+  $(document).ready(function() {
+  var formURL = 'https://www.genfkd.org/?rest_route=/wp/v2/posts';
+  $.getJSON(formURL, function(api_data) {
 
-        var i = 0;
+    // Creating list of articles
+    api_data.forEach(function(item, index) {
 
-        // Creating list of articles
+      output.innerHTML += '<li id="myLink'+index+'">' + '<a href=#>' + item.title.rendered + '</a>' + '</li>';
 
-        api_data.forEach(function(key, value) {
-          output.innerHTML += '<li>' + '<a href=#>' + api_data[i].title.rendered + '</a>' + '</li>';
+      // Extracting article content in to HTML and hide
 
-          $("li").attr('id', function(i) {
-            return "myLink" + i;
-          });
+      output.innerHTML += '<article id="myArticle'+index+'">' +
+        item.content.rendered + '</article>';
+    });
 
-          // Extracting article content in to HTML and hide
-
-          output.innerHTML += '<article>' +
-            api_data[i].content.rendered + '</article>';
-          i++;
-
-          $("article").attr('id', function(i) {
-            return "myArticle" + i;
-          });
-        });
-
-        $("article").hide();
+    $("article").hide();
 
 
-        //detecting and handling click on list element
-        $('li').click(function() {
+    //detecting and handling click on list element
+    $('li').click(function() {
 
-          // fake loading animation :-)
+      // fake loading animation :-)
 
-          $('.loading').show(0).delay(400).hide(0);
+      $('.loading').show(0).delay(400).hide(0);
 
-          var id = $(this).attr('id');
+      var id = $(this).attr('id');
 
-          //get the number from list item's id using regex
-          var number = id.match(/\d/g);
+      //get the number from list item's id using regex
+      var number = id.match(/\d/g);
 
-          //showing div with id myArticle+number
-          $('#myArticle' + number).dialog({
+      //showing div with id myArticle+number
+      $('#myArticle' + number).dialog({
 
-            width: "auto",
-          });
-        });
+        width: "auto",
       });
     });
+  });
+});
   </script>
 </body>
 
