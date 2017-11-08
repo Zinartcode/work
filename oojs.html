@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Object-oriented JavaScript example</title>
+  </head>
+
+  <body>
+    <div>
+      <label for="jscode">Enter code:</label>
+      <input type="text" id="jscode">
+      <button>Submit code</button>
+    </div>
+
+    <p></p>
+  </body>
+
+    <script>
+      var input = document.querySelector('input');
+      var btn = document.querySelector('button');
+      var para = document.querySelector('p');
+      btn.onclick = function() {
+        var code = input.value;
+        para.textContent = eval(code);
+      }
+
+      function Person(first, last, age, gender, interests) {
+        this.name = {
+          first,
+          last
+        };
+        this.age = age;
+        this.gender = gender;
+        this.interests = interests;
+        var i = 0;
+        while (interests[i])
+        i++;
+        this.bio = function() {
+
+          console.log(i);
+
+          if (gender == 'male') {
+          alert(this.name.first + ' ' + this.name.last + ' is ' + this.age + ' years old. He likes ' + this.interests.join(", "));
+        }
+          else {
+          alert(this.name.first + ' ' + this.name.last + ' is ' + this.age + ' years old. She likes ' + this.interests.join(", "));
+          }
+        };
+        this.greeting = function() {
+          alert('Hi! I\'m ' + this.name.first + '.');
+        };
+      }
+
+      var girl = new Person('Suka', 'Blyat', 32, 'female', ['fuck around', 'sleep', 'smoke']);
+      var king = new Person('Arthur', 'Zinman', 31, 'male', ['to be a king', 'drugs', 'not to give a fuck']);
+
+      var person3 = new girl.constructor('Karen', 'Stephenson', 26, 'female', ['playing drums', 'mountain climbing']);
+
+      Person.prototype.farewell = function() {
+  alert(this.name.first + ' has left the building. Bye for now!');
+};
+// king.farawell();
+
+
+
+// call() function basically allows you to call a function defined somewhere else, but in the current context.
+// The last line inside the constructor simply defines the new subject property that teachers are going to have, which generic people don't have.
+function Teacher(first, last, age, gender, interests, subject) {
+  Person.call(this, first, last, age, gender, interests);
+
+  this.subject = subject;
+
+  //  using create()  to create a new object and make it the value of Teacher.prototype.
+  Teacher.prototype = Object.create(Person.prototype);
+
+  Teacher.prototype.constructor = Teacher;
+
+  // define a new greeting() function on the Teacher() constructor.
+  Teacher.prototype.greeting = function() {
+  var prefix;
+
+  if (this.gender === 'male' || this.gender === 'Male' || this.gender === 'm' || this.gender === 'M') {
+    prefix = 'Mr.';
+  } else if (this.gender === 'female' || this.gender === 'Female' || this.gender === 'f' || this.gender === 'F') {
+    prefix = 'Mrs.';
+  } else {
+    prefix = 'Mx.';
+  }
+
+  alert('Hello. My name is ' + prefix + ' ' + this.name.last + ', and I teach ' + this.subject + '.');
+};
+}
+
+    </script>
+</html>
