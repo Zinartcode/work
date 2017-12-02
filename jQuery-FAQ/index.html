@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQery FAQ</title>
+    <style>
+
+    body {
+      font-family: 'roboto', sans-serif;
+      color: #666;
+      font-size: 16px;
+      background: #f9f9f9;
+      line-height: 1.6em;
+    }
+
+
+    .faq li { padding: 20px; }
+
+    .faq li.q {
+      background: #4FC2E;
+      font-weight: bold;
+      font-size: 120%;
+      border-bottom: 1px #ddd solid;
+      cursor: pointer;
+    }
+
+    .faq li.a {
+      background: #3BB0D6;
+      display: none;
+      color:#fff;
+    }
+
+    </style>
+</head>
+
+<body>
+  <ul class="faq">
+
+  <li class="q">
+    Should I have a baby after 35?
+  </li>
+  <li class="a">No, 35 children is enough.</li>
+
+  <li class="q">
+    I'm two mothns pregnant now. When will my baby move?
+  </li>
+  <li class="a">With any luck, right after he finishes college.</li>
+
+  <li class="q">
+    Do I have to have a baby shower?
+  </li>
+  <li class="a">Not if you change the baby's diaper very quickly.</li>
+
+  <li class="q">
+    Our baby was born last week. When will my wife begin to feel and act normal again?
+  </li>
+  <li class="a">When the kids are in college.</li>
+
+  </ul>
+
+</body>
+
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script>
+// Accordian Action
+var action = 'click';
+var speed = "500";
+
+
+$(document).ready(function(){
+    console.log('ready')
+
+// Question handler
+  $('li.q').on('click', function(){
+    console.log('clicked')
+
+    // gets next element
+    // opens .a of selected question
+    $(this).next().slideToggle(speed)
+
+    // selects all other answers and slides up any open answer
+    .siblings('li.a').slideUp();
+
+  });
+
+});
+</script>
+
+
+</html>
